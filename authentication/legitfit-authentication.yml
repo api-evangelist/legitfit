@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: searched
+source: https://legitfit.com/.well-known/oauth-authorization-server
+docs: https://legitfit.com/.well-known/oauth-authorization-server
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  bearer_methods:
+  - header
+  pkce_required_methods:
+  - S256
+note: >-
+  Derived from LegitFit's published RFC 8414 authorization-server metadata and RFC 9728
+  protected-resource metadata rather than from an OpenAPI document — LegitFit publishes
+  no public OpenAPI. The only publicly advertised protected resource is the MCP server
+  at https://legitfit.com/api/mcp. LegitFit does not publish an OpenID Connect discovery
+  document, so this is plain OAuth 2.x/2.1 authorization, not OIDC.
+schemes:
+- name: LegitFitOAuth2
+  type: oauth2
+  issuer: https://legitfit.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://legitfit.com/api/oauth2/authorize
+    tokenUrl: https://legitfit.com/api/oauth2/token
+    response_types_supported:
+    - code
+    code_challenge_methods_supported:
+    - S256
+    scopes:
+    - mcp:read
+    - mcp:write
+  token_endpoint_auth_methods_supported:
+  - none
+  - client_secret_basic
+  - client_secret_post
+  client_id_metadata_document_supported: true
+  sources:
+  - well-known/legitfit-oauth-authorization-server.json
+protected_resources:
+- resource: https://legitfit.com/api/mcp
+  bearer_methods_supported:
+  - header
+  scopes_supported:
+  - mcp:read
+  - mcp:write
+  source: well-known/legitfit-oauth-protected-resource.json
+end_user_login: https://legitfit.com/authenticate/signin
