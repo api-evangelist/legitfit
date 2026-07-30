@@ -1,0 +1,1 @@
+{"resource":"https://legitfit.com/api/mcp","authorization_servers":["https://legitfit.com"],"scopes_supported":["mcp:read","mcp:write"],"bearer_methods_supported":["header"]}

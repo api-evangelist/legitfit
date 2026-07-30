@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: probed
+source: >-
+  Live JSON-RPC calls against https://legitfit.com/api/mcp. LegitFit publishes no
+  OpenAPI and no error reference page, so this catalog records only errors that
+  were actually observed on the wire plus the envelope they arrive in.
+format: jsonrpc-2.0
+not_rfc9457: true
+envelope:
+  shape: '{"jsonrpc": "2.0", "id": <id>, "error": {"code": <int>, "message": <string>}}'
+  content_type: application/json; charset=utf-8
+  note: >-
+    Errors are carried in the JSON-RPC error member. The HTTP status is used in
+    parallel — the unauthenticated case returns HTTP 401 alongside the JSON-RPC
+    error body.
+problems:
+- code: -32001
+  http_status: 401
+  title: Unauthenticated MCP request
+  message: Unauthenticated MCP request
+  meaning: >-
+    The request carried no valid OAuth 2.1 bearer token for the MCP resource.
+  remediation: >-
+    Obtain a token via the authorization_code + PKCE (S256) flow at
+    https://legitfit.com/api/oauth2/authorize, exchange it at
+    https://legitfit.com/api/oauth2/token, and send it as
+    "Authorization: Bearer <token>". Required scopes: mcp:read and/or mcp:write.
+  www_authenticate: 'Bearer realm="mcp", resource_metadata="https://legitfit.com/.well-known/oauth-protected-resource"'
+  observed: true
+  source: https://legitfit.com/api/mcp
+unenumerated:
+  note: >-
+    The full error surface (JSON-RPC standard codes -32700/-32600/-32601/-32602/
+    -32603 and any LegitFit-specific codes) could not be enumerated without
+    credentials. Only the observed error above is asserted.

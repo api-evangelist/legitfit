@@ -1,0 +1,37 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: LegitFit
+providerId: legitfit
+generated: '2026-07-19'
+method: probed
+created: '2026-07-19'
+modified: '2026-07-19'
+tags:
+- Rate Limiting
+- Fitness
+- MCP
+description: >-
+  LegitFit does not publish a rate-limit policy page. These limits were observed
+  directly on the response headers of the LegitFit MCP endpoint
+  (https://legitfit.com/api/mcp), which emits the IETF draft RateLimit header
+  fields: "ratelimit-policy: 60;w=60" and "ratelimit: limit=60, remaining=58,
+  reset=50". The window is therefore 60 requests per 60-second window. Because
+  the value was observed unauthenticated, the authenticated per-token quota may
+  differ and is not asserted here.
+sources:
+- https://legitfit.com/api/mcp
+headers:
+  policy: RateLimit-Policy
+  limit: RateLimit
+  standard: IETF draft-ietf-httpapi-ratelimit-headers
+responseCodes:
+  throttled: 429
+limits:
+- name: MCP endpoint requests
+  scope: client
+  metric: requests_per_window
+  limit: 60
+  timeFrame: minute
+  window_seconds: 60
+  observed_on: https://legitfit.com/api/mcp
+  evidence: 'ratelimit-policy: 60;w=60'

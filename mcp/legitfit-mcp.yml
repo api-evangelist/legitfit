@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://legitfit.com/.well-known/oauth-protected-resource
+server:
+  name: legitfit
+  transport: http
+  url: https://legitfit.com/api/mcp
+  protocol: Model Context Protocol
+authorization:
+  required: true
+  scheme: OAuth 2.1 bearer token
+  bearer_methods_supported:
+  - header
+  www_authenticate: 'Bearer realm="mcp", resource_metadata="https://legitfit.com/.well-known/oauth-protected-resource"'
+  authorization_servers:
+  - https://legitfit.com
+  authorization_endpoint: https://legitfit.com/api/oauth2/authorize
+  token_endpoint: https://legitfit.com/api/oauth2/token
+  grant_types_supported:
+  - authorization_code
+  code_challenge_methods_supported:
+  - S256
+  client_id_metadata_document_supported: true
+  scopes:
+  - scope: mcp:read
+    description: Read access to LegitFit resources exposed through the MCP server.
+  - scope: mcp:write
+    description: Write access to LegitFit resources exposed through the MCP server.
+tools: []
+tools_note: >-
+  The tools/list method requires an authenticated bearer token — an unauthenticated
+  JSON-RPC call returns {"code": -32001, "message": "Unauthenticated MCP request"}.
+  The tool surface could not be enumerated without LegitFit credentials, so no tool
+  list is asserted here. LegitFit publishes no OpenAPI, so no candidate tools were
+  derived either.
+evidence:
+- source: https://legitfit.com/.well-known/oauth-protected-resource
+  detail: 'resource: https://legitfit.com/api/mcp, scopes_supported: [mcp:read, mcp:write]'
+- source: https://legitfit.com/.well-known/oauth-authorization-server
+  detail: 'scopes_supported: [mcp:read, mcp:write]; PKCE S256; authorization_code'
+- source: https://legitfit.com/api/mcp
+  detail: HTTP 401 with RFC 9728 WWW-Authenticate challenge; JSON-RPC error -32001

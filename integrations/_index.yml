@@ -1,0 +1,55 @@
+generated: '2026-07-19'
+method: searched
+source: https://legitfit.com/features-legitfit/app-integrations
+note: >-
+  Listing-only. LegitFit publishes no OpenAPI, so no Arazzo workflow can be
+  authored against verified operationIds on the LegitFit side — every entry
+  below is status: pending-provider-spec with arazzo: null. These are the
+  partner integrations LegitFit advertises on its App Integrations page.
+integrations:
+- slug: legitfit-classpass
+  label: LegitFit + ClassPass
+  partner: classpass
+  category: marketplace-distribution
+  use_case: >-
+    List LegitFit classes on ClassPass to reach new members and fill open spots;
+    bookings flow back into the LegitFit timetable.
+  arazzo: null
+  status: pending-provider-spec
+- slug: legitfit-gohighlevel
+  label: LegitFit + GoHighLevel
+  partner: gohighlevel
+  category: marketing-crm
+  use_case: >-
+    Centralise lead generation, sales funnels, marketing automation and CRM in
+    GoHighLevel alongside LegitFit's member records.
+  arazzo: null
+  status: pending-provider-spec
+- slug: legitfit-zapier
+  label: LegitFit + Zapier
+  partner: zapier
+  category: workflow-automation
+  use_case: >-
+    Connect a LegitFit account to thousands of other apps to automate operations
+    and marketing tasks without code.
+  arazzo: null
+  status: pending-provider-spec
+- slug: legitfit-stripe
+  label: LegitFit + Stripe
+  partner: stripe
+  category: payments
+  use_case: >-
+    Process online and offline member payments, recurring memberships, custom
+    fees and discounts through LegitFit's integrated payments, with Stripe setup,
+    payouts, retries and refunds handled in-app.
+  arazzo: null
+  status: pending-provider-spec
+- slug: legitfit-turnstiles
+  label: LegitFit + turnstile access control
+  partner: null
+  category: access-control
+  use_case: >-
+    Integrate physical turnstiles with LegitFit membership status for gated
+    member entry during classes and peak hours.
+  arazzo: null
+  status: pending-provider-spec

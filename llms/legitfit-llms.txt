@@ -1,0 +1,60 @@
+# LegitFit
+
+> LegitFit is an Irish (Cork-based) all-in-one gym, studio and fitness-business management platform covering class and appointment scheduling, memberships and packages, integrated payments, client and staff management, exercise programming, automations and a branded member app. LegitFit does not operate a public developer portal or publish an OpenAPI description, but it does run an OAuth 2.1-protected Model Context Protocol (MCP) server, discoverable through RFC 8414 and RFC 9728 well-known metadata.
+
+## Agent access
+
+- [MCP server](https://legitfit.com/api/mcp): JSON-RPC 2.0 Model Context Protocol endpoint. Requires an OAuth 2.1 bearer token. Scopes: mcp:read, mcp:write.
+- [Protected resource metadata](https://legitfit.com/.well-known/oauth-protected-resource): RFC 9728 document naming the MCP resource, its authorization server and its scopes.
+- [Authorization server metadata](https://legitfit.com/.well-known/oauth-authorization-server): RFC 8414 document. authorization_code grant, PKCE S256 required, client_id_metadata_document_supported.
+- Authorize: https://legitfit.com/api/oauth2/authorize
+- Token: https://legitfit.com/api/oauth2/token
+- Rate limit: 60 requests per 60-second window, signalled with the IETF RateLimit / RateLimit-Policy headers.
+- Errors: JSON-RPC 2.0 error objects. An unauthenticated call returns HTTP 401 with code -32001 "Unauthenticated MCP request".
+
+## Product
+
+- [Features overview](https://legitfit.com/features-legitfit/app-integrations)
+- [Class & appointment scheduling](https://legitfit.com/features-legitfit/class-appointment-scheduling)
+- [Memberships management](https://legitfit.com/features-legitfit/memberships-management)
+- [Integrated payments](https://legitfit.com/features-legitfit/integrated-payments)
+- [Analytics & reporting](https://legitfit.com/features-legitfit/analytics-reporting)
+- [Client communications](https://legitfit.com/features-legitfit/client-communications)
+- [Member & client management](https://legitfit.com/features-legitfit/member-client-management)
+- [Team management](https://legitfit.com/features-legitfit/team-management)
+- [Exercise programming](https://legitfit.com/features-legitfit/exercise-programming)
+- [Automations & lead nurture](https://legitfit.com/features-legitfit/triggers-automation)
+- [Branded app & emails](https://legitfit.com/features-legitfit/branded-app-emails)
+- [AI assistance (Lia)](https://legitfit.com/features-legitfit/ai)
+
+## Integrations
+
+- [App integrations](https://legitfit.com/features-legitfit/app-integrations): ClassPass, GoHighLevel, Zapier, Stripe, turnstile access-control hardware.
+
+## Company and support
+
+- [About](https://legitfit.com/about)
+- [Pricing](https://legitfit.com/pricing)
+- [Support centre](https://support.legitfit.com/business)
+- [Blog](https://legitfit.com/blog)
+- [Customer stories](https://legitfit.com/customer-stories)
+- [Terms](https://legitfit.com/terms)
+- [Sign in](https://legitfit.com/authenticate/signin)
+- [Sign up free](https://legitfit.com/sign-up-free)
+
+## API Evangelist artifacts
+
+- APIs.json: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/apis.yml
+- MCP: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/mcp/legitfit-mcp.yml
+- Authentication: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/authentication/legitfit-authentication.yml
+- OAuth scopes: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/scopes/legitfit-scopes.yml
+- Well-known: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/well-known/legitfit-well-known.yml
+- Conventions: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/conventions/legitfit-conventions.yml
+- Conformance: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/conformance/legitfit-conformance.yml
+- Errors: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/errors/legitfit-problem-types.yml
+- Rate limits: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/rate-limits/legitfit-rate-limits.yml
+- Domain security: https://raw.githubusercontent.com/api-evangelist/legitfit/refs/heads/main/security/legitfit-domain-security.yml
+
+## Notes
+
+- No public OpenAPI, no developer portal, no API reference, no SDKs, no CLI, no status page, no changelog, no security.txt and no trust center were found as of 2026-07-19.

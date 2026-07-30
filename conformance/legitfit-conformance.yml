@@ -1,0 +1,77 @@
+generated: '2026-07-19'
+method: probed
+source: >-
+  Live probes of LegitFit's /.well-known/ documents and the MCP endpoint at
+  https://legitfit.com/api/mcp. Every "conforms: true" below is backed by an
+  observed document or response header; "conforms: false" means the probe found
+  no evidence, not that LegitFit disclaims the standard.
+standards:
+- id: oauth2
+  name: OAuth 2.0 / 2.1 authorization
+  conforms: true
+  evidence: >-
+    /.well-known/oauth-authorization-server advertises authorization_code grant,
+    authorize + token endpoints, and client authentication methods.
+- id: rfc8414-oauth-server-metadata
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://legitfit.com/.well-known/oauth-authorization-server returns 200 JSON
+- id: rfc9728-protected-resource-metadata
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: >-
+    https://legitfit.com/.well-known/oauth-protected-resource returns 200 JSON and
+    is referenced from the 401 WWW-Authenticate challenge on /api/mcp.
+- id: rfc7636-pkce
+  name: Proof Key for Code Exchange
+  conforms: true
+  evidence: 'code_challenge_methods_supported: ["S256"]'
+- id: rfc6750-bearer-token
+  name: OAuth 2.0 Bearer Token Usage
+  conforms: true
+  evidence: 'bearer_methods_supported: ["header"]; WWW-Authenticate: Bearer realm="mcp"'
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    JSON-RPC 2.0 MCP endpoint at https://legitfit.com/api/mcp with mcp:read /
+    mcp:write scopes and MCP-style OAuth (client_id_metadata_document_supported).
+- id: jsonrpc-2.0
+  name: JSON-RPC 2.0
+  conforms: true
+  evidence: 'Error responses use {"jsonrpc":"2.0","id":…,"error":{"code":…,"message":…}}'
+- id: ietf-ratelimit-headers
+  name: IETF RateLimit header fields (draft)
+  conforms: true
+  evidence: 'ratelimit-policy: 60;w=60 and ratelimit: limit=60, remaining=58, reset=50'
+- id: rfc6797-hsts
+  name: HTTP Strict Transport Security
+  conforms: partial
+  evidence: >-
+    /api/* sends strict-transport-security max-age=15778476000; includeSubDomains.
+    The Webflow marketing site on the same host does not send HSTS.
+- id: openid-connect
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence: Errors are JSON-RPC error objects, not application/problem+json
+- id: rfc9116-security-txt
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404
+- id: rfc9727-api-catalog
+  name: .well-known/api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404
+- id: openapi
+  name: OpenAPI description
+  conforms: false
+  evidence: No public OpenAPI document was found
+certifications_published: false
+certifications_note: >-
+  No trust center, compliance page or named certification (SOC 2, ISO 27001, PCI
+  DSS, HIPAA, GDPR posture page) was found — probe-security-programs.py returned
+  trust=none. No Compliance pointer is emitted.

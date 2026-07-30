@@ -1,0 +1,75 @@
+generated: '2026-07-19'
+method: probed
+source: >-
+  Live observation of https://legitfit.com/api/mcp plus LegitFit's published
+  /.well-known/ OAuth metadata. LegitFit publishes no developer portal, no API
+  reference and no OpenAPI, so these conventions are what the live endpoint
+  actually demonstrates — not a documented contract.
+description: >-
+  Cross-cutting request/response semantics for LegitFit's only publicly reachable
+  programmatic surface, the MCP server at https://legitfit.com/api/mcp. This is a
+  JSON-RPC 2.0 endpoint over HTTP, not a REST API, so several conventions this
+  artifact normally captures (pagination, field expansion, sparse fields,
+  metadata) are properties of the individual MCP tools and are not observable
+  without credentials.
+
+base_url: https://legitfit.com/api/mcp
+api_style: JSON-RPC 2.0 over HTTP (Model Context Protocol)
+
+authentication:
+  scheme: OAuth 2.1 bearer token in the Authorization header
+  flows: [authorization_code with PKCE S256]
+  discovery: >-
+    RFC 9728 protected-resource metadata is advertised on the 401 challenge:
+    WWW-Authenticate: Bearer realm="mcp",
+    resource_metadata="https://legitfit.com/.well-known/oauth-protected-resource"
+  scopes: [mcp:read, mcp:write]
+  detail: authentication/legitfit-authentication.yml
+
+idempotency:
+  supported: unknown
+  mechanism: null
+  note: >-
+    No idempotency-key header is documented or observable on the unauthenticated
+    surface, and there is no OpenAPI declaring one. No idempotency contract is
+    asserted for LegitFit.
+
+pagination:
+  style: unknown
+  note: >-
+    Not observable — pagination, if any, is a property of individual MCP tool
+    results and requires an authenticated tools/list call to inspect.
+
+versioning:
+  scheme: uri-path
+  detail: >-
+    The endpoint is mounted at /api/mcp with no version segment. MCP itself is
+    version-negotiated per session via the protocolVersion field on initialize.
+
+error_envelope:
+  format: JSON-RPC 2.0 error object
+  shape: '{"jsonrpc": "2.0", "id": <id>, "error": {"code": <int>, "message": <string>}}'
+  observed_example: '{"jsonrpc":"2.0","id":1,"error":{"code":-32001,"message":"Unauthenticated MCP request"}}'
+  detail: errors/legitfit-problem-types.yml
+  note: Not RFC 9457 problem+json — the endpoint returns JSON-RPC errors.
+
+rate_limit_signaling:
+  supported: true
+  headers: [RateLimit, RateLimit-Policy]
+  standard: IETF draft-ietf-httpapi-ratelimit-headers
+  observed: 'ratelimit-policy: 60;w=60 / ratelimit: limit=60, remaining=58, reset=50'
+  detail: rate-limits/legitfit-rate-limits.yml
+
+request_tracing:
+  supported: false
+  note: No request-id or correlation-id response header was observed.
+
+transport_security:
+  hsts: true
+  hsts_max_age: 15778476000
+  hsts_include_subdomains: true
+  note: >-
+    HSTS is sent by the API backend (/api/*, fronted by an AWS ALB). The Webflow
+    marketing site at the same host does not send HSTS — see
+    security/legitfit-domain-security.yml.
+  other_headers: [x-content-type-options, x-xss-protection, x-download-options]

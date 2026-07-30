@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of https://legitfit.com/.well-known/*
+host: https://legitfit.com
+notes: >-
+  LegitFit publishes RFC 8414 OAuth 2.0 Authorization Server Metadata and RFC 9728
+  OAuth 2.0 Protected Resource Metadata. Both exist to support an MCP (Model Context
+  Protocol) server at https://legitfit.com/api/mcp — the advertised scopes are
+  mcp:read and mcp:write. No security.txt, OpenID Connect discovery, api-catalog or
+  ai-plugin document is published.
+documents:
+- path: /.well-known/oauth-authorization-server
+  standard: RFC 8414
+  status: 200
+  file: legitfit-oauth-authorization-server.json
+- path: /.well-known/oauth-protected-resource
+  standard: RFC 9728
+  status: 200
+  file: legitfit-oauth-protected-resource.json
+- path: /.well-known/security.txt
+  standard: RFC 9116
+  status: 404
+- path: /.well-known/openid-configuration
+  standard: OpenID Connect Discovery 1.0
+  status: 404
+- path: /.well-known/api-catalog
+  standard: RFC 9727
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
