@@ -13,6 +13,17 @@ description: >-
   OAuth 2.1-protected Model Context Protocol (MCP) server at https://legitfit.com/api/mcp,
   discoverable through RFC 8414 authorization-server and RFC 9728 protected-resource
   metadata, with mcp:read and mcp:write scopes.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
