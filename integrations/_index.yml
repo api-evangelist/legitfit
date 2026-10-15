@@ -29,6 +29,8 @@
     code.
   status: pending-partner-spec
   source: curated
+  evidence: https://zapier.com/apps/legitfit/integrations
+  type: marketplace
   arazzo: null
 - slug: legitfit-stripe
   label: LegitFit + Stripe
@@ -63,6 +65,6 @@
     registered_name: com.legitfit/legitfit
     register_id: com.legitfit/legitfit
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
