@@ -27,7 +27,7 @@
   category: workflow-automation
   use_case: Connect a LegitFit account to thousands of other apps to automate operations and marketing tasks without
     code.
-  status: pending-partner-spec
+  status: not-a-workflow
   source: curated
   evidence: https://zapier.com/apps/legitfit/integrations
   type: marketplace
