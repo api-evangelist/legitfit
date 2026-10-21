@@ -38,8 +38,10 @@
   category: payments
   use_case: Process online and offline member payments, recurring memberships, custom fees and discounts through
     LegitFit's integrated payments, with Stripe setup, payouts, retries and refunds handled in-app.
-  status: pending-partner-spec
+  status: not-a-workflow
   source: curated
+  evidence: https://stripe.partners/directory/legitfit
+  type: register
   arazzo: null
 - slug: legitfit-turnstiles
   label: LegitFit + turnstile access control
@@ -65,6 +67,6 @@
     registered_name: com.legitfit/legitfit
     register_id: com.legitfit/legitfit
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
